@@ -8,6 +8,10 @@ class User < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_one_attached :profile_image
   has_many :book_comments, dependent: :destroy
+  #DM機能関係
+  has_many :user_rooms, dependent: :destroy
+  has_many :chats, dependent: :destroy
+  has_many :rooms, through: :user_rooms
 
   validates :name, length: { minimum: 2, maximum: 20 }, uniqueness: true
 
@@ -58,5 +62,7 @@ class User < ApplicationRecord
       User.where('name LIKE ?', '%' + content + '%')
     end
   end
+  
+
   
 end
